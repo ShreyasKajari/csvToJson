@@ -1,0 +1,5 @@
+name.firstName, name.lastName, age, address.line1, address.line2, address.city, address.state, gender
+Rohit, Prasad, 18, A-563 Rakshak Society, New Pune Road, Pune, Maharashtra, male
+Roshan,kumar,23,Ganesh nagar, church road, Thane, Maharashtra, male
+Shruti, singh,46, Ram nagar, durga chowk, Surat, Gujarat, Female
+Jayesh, Hire,70,Durga nagar, Chitalsar, Mumbai, Maharashtra, Male
