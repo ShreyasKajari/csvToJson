@@ -4,6 +4,7 @@ This code sets up an Express server, imports data from a CSV file into a Postgre
 2] Create table 'public.users' under this database with following columns:
     { id serial4 NOT NULL,
     firstName varchar NOT NULL,
+    lastName varchar NOT NULL,
     age int4 NOT NULL,
     address jsonb NULL,
     additional_info jsonb NULL,
