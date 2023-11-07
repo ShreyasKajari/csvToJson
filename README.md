@@ -11,5 +11,12 @@ This code sets up an Express server, imports data from a CSV file into a Postgre
     name varchar GENERATED ALWAYS AS (firstName || ' ' || lastName) STORED }
 3] Open .env file and provide required details as per your database configuration.
 4] Open data.csv file and make changes accordingly (add or remove rows).
-5] After running this code a new json file will be created named 'output.json' and data from 'data.csv' file will be overwrite in this output.json file. At the same time data will be imported into the table public.users that is created earlier.
+5] Open cmd and go to the project directory and run command 'node app.js'.A server will start on port 3000.
+6] Once the server is running, you can access the endpoints as described in code:
+To import data from the CSV file, you can make a POST request to http://localhost:3000/import-data
+--this will convert csv file to json file and import data into the database.
+(In Postman or similar tools, create a new request, set the HTTP method to POST, and enter the URL (e.g., http://localhost:3000/import-data).)
+To calculate the age distribution, you can make a GET request to http://localhost:3000/calculate-age-distribution
+--This will print age distribution report in console.
+((In Postman or similar tools, create a new request, set the HTTP method to GET, and enter the URL (e.g., http://localhost:3000/calculate-age-distribution).))
 
