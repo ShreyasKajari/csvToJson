@@ -1,6 +1,6 @@
 ### csvToJson
 This code sets up an Express server, imports data from a CSV file into a PostgreSQL database, calculates age distribution, and then closes the server.
-1] Before running this code make sure you have created the database in postgreSQL.
+1] Before running this code make sure you have created the database in postgreSQL.<br>
 2] Create table 'public.users' under this database with following columns:
     { id serial4 NOT NULL,
     firstName varchar NOT NULL,
