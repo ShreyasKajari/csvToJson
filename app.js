@@ -1,9 +1,7 @@
 const express = require('express');
-const csvtojson = require('csvtojson');
 const fs = require('fs');
 const app = express();
 const { Pool } = require('pg');
-const http = require('http');
 const dotenv = require('dotenv');
 
 dotenv.config(); // Load environment variables from .env file
@@ -21,18 +19,47 @@ const pool = new Pool(dbConfig);
 
 app.use(express.json());
 app.use('/import-data', (req, res, next) => {
-  // Convert the uploaded CSV to JSON
-  csvtojson()
-    .fromFile(process.env.CSV_FILE_PATH)
-    .then((jsonArray) => {
-      // Save the JSON data to a file
-      fs.writeFileSync('output.json', JSON.stringify(jsonArray, null, 2));
-      next();
-    })
-    .catch((err) => {
+  // Read the CSV file
+  const csvFilePath = process.env.CSV_FILE_PATH;
+
+  fs.readFile(csvFilePath, 'utf8', (err, data) => {
+    if (err) {
       res.status(500).json({ error: err.message });
-    });
+      return;
+    }
+
+    // Split the CSV data into lines and get the header and rows
+    const lines = data.split('\n');
+    const header = lines[0].split(',').map((item) => item.trim());
+    const jsonArray = [];
+
+    for (let i = 1; i < lines.length; i++) {
+      const row = lines[i].split(',').map((item) => item.trim());
+      const rowData = {};
+
+      for (let j = 0; j < header.length; j++) {
+        const keys = header[j].split('.');
+        let currentObject = rowData;
+
+        for (let k = 0; k < keys.length - 1; k++) {
+          if (!currentObject[keys[k]]) {
+            currentObject[keys[k]] = {};
+          }
+          currentObject = currentObject[keys[k]];
+        }
+
+        currentObject[keys[keys.length - 1]] = row[j];
+      }
+
+      jsonArray.push(rowData);
+    }
+
+    // Save the JSON data to a file
+    fs.writeFileSync('output.json', JSON.stringify(jsonArray, null, 2));
+    next();
+  });
 });
+
 
 app.post('/import-data', (req, res) => {
   try {
