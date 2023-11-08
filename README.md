@@ -1,5 +1,5 @@
 ## csvToJson
-This code sets up an Express server, imports data from a CSV file into a PostgreSQL database, calculates age distribution, and then closes the server.
+This code sets up an Express server that imports data from a CSV file, converts it to JSON, and saves the JSON data to a file. It provides an endpoint for importing the data from the JSON file into a PostgreSQL database and also for calculating the age distribution of users in the database and returns the results as JSON and also print it in console.
 ## Prerequisites
 1. **Database Setup:** Make sure you have created a PostgreSQL database.
 
